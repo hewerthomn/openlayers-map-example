@@ -179,9 +179,7 @@ var Map = {
 				icon:  points[key].icon
 			};
 
-			console.log('pointOpts', pointOpts);
-
-			var point = new OpenLayers.Geometry.Point(points[key].xy.x, points[key].xy.y);
+			var point = new OpenLayers.Geometry.Point(points[key].lon, points[key].lat);
 			var trans = point.transform(new OpenLayers.Projection('EPSG:4326'), self._map.getProjection());
 
 			var feature = new OpenLayers.Feature.Vector(point, pointOpts);
