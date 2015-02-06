@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Maps</title>
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+	<div class="container-fluid">
+
+		<div id="header" class="well well-sm">
+			<h1>Maps example</h1>
+			<p>
+				<label for="zoom">
+					Zoom
+					<select id="zoom" class="form-control">
+						<option value="1">1</option>
+						<option value="2">2</option>
+						<option value="3" selected>3</option>
+						<option value="4">4</option>
+						<option value="5">5</option>
+						<option value="6">6</option>
+						<option value="7">7</option>
+						<option value="8">8</option>
+						<option value="9">9</option>
+						<option value="10">10</option>
+					</select>
+				</label>
+				<button type="button" class="btn btn-primary" id="toPvh">Para PVH</button>
+				<hr>
+				<label for="lat">
+					Lat
+					<input type="text" id="lat" value="-1059111.4637721" class="form-control input-sm">
+				</label>
+				<br>
+				<label for="lon">
+					Lon
+					<input type="text" id="lon" value="-5875255.7412941" class="form-control input-sm">
+				</label>
+				<br>
+				<button type="button" class="btn btn-block btn-success" id="toLatLon">Ir para Lat/Lon</button>
+			</p>
+		</div>
+		
+		<div id="map" style="height:900px; position: relative; top: 0">
+
+		</div>
+	</div>
+
+	<script src="http://maps.google.com/maps/api/js?v=3&amp;sensor=false"></script>
+	<script src="js/OpenLayers.js"></script>
+	<script src="js/jquery-1.11.2.min.js"></script>
+	<script src="js/Map.js"></script>
+	<script>
+		$(document).ready(function() {
+
+			var onSelectPoint = function(point)
+			{
+				console.log('point', point);
+			};
+
+			Map.init({
+				id: 'map',
+				startZoom: 1,
+				startPoint: { lon: -5875255.7412941, lat: -1059111.4637721 },
+				onSelectPoint: onSelectPoint
+			});
+
+			$('#toPvh').on('click', function() {
+				var $this = $(this);
+				var zoom = parseInt($('#zoom').val(), 10);
+
+				Map.setCenterMap({
+					'lon': -7111653.3375207,
+					'lat': -977658.25551701
+				}, zoom);
+			});
+
+			$('#toLatLon').on('click', function()
+			{
+				var $this = $(this);
+				var zoom = parseInt($('#zoom').val(), 10);
+				var lon = parseFloat($('#lon').val());
+				var lat = parseFloat($('#lat').val());
+
+				Map.setCenterMap({
+					'lon': lon, 'lat': lat
+				}, zoom);
+			});
+
+		});
+	</script>
+</body>
+</html>
