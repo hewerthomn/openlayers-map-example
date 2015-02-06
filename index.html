@@ -51,44 +51,6 @@
 	<script src="js/OpenLayers.js"></script>
 	<script src="js/jquery-1.11.2.min.js"></script>
 	<script src="js/Map.js"></script>
-	<script>
-		$(document).ready(function() {
-
-			var onSelectPoint = function(point)
-			{
-				console.log('point', point);
-			};
-
-			Map.init({
-				id: 'map',
-				startZoom: 1,
-				startPoint: { lon: -5875255.7412941, lat: -1059111.4637721 },
-				onSelectPoint: onSelectPoint
-			});
-
-			$('#toPvh').on('click', function() {
-				var $this = $(this);
-				var zoom = parseInt($('#zoom').val(), 10);
-
-				Map.setCenterMap({
-					'lon': -7111653.3375207,
-					'lat': -977658.25551701
-				}, zoom);
-			});
-
-			$('#toLatLon').on('click', function()
-			{
-				var $this = $(this);
-				var zoom = parseInt($('#zoom').val(), 10);
-				var lon = parseFloat($('#lon').val());
-				var lat = parseFloat($('#lat').val());
-
-				Map.setCenterMap({
-					'lon': lon, 'lat': lat
-				}, zoom);
-			});
-
-		});
-	</script>
+	<script src="js/app.js"></script>
 </body>
 </html>

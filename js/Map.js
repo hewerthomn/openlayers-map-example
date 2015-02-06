@@ -57,6 +57,24 @@ var Map = {
 			})
 		];
 
+		self._layers = {
+			points: new OpenLayers.Layer.Vector('Points', {
+				styleMap: new OpenLayers.StyleMap({
+					'default': {
+						label: "${label}",
+						labelYOffset: 27,
+						fontSize: '16px',
+						fontWeight: 'bold',
+						externalGraphic: "${icon}",
+						graphicWidth: 40
+					},
+					'select': {
+						cursor: 'pointer'
+					}
+				})
+			})
+		};
+
 		self._map.addLayers(self._baselayers);
 		for(var key in self._layers)
 		{
@@ -160,6 +178,8 @@ var Map = {
 				label: label,
 				icon:  points[key].icon
 			};
+
+			console.log('pointOpts', pointOpts);
 
 			var point = new OpenLayers.Geometry.Point(points[key].xy.x, points[key].xy.y);
 			var trans = point.transform(new OpenLayers.Projection('EPSG:4326'), self._map.getProjection());
